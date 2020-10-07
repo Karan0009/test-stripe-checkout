@@ -9,6 +9,9 @@ how to start app-
   > PORT=\{port here\} \(e.g. 8080\)  
   > STRIPE_PUBLIC_KEY=\{ your public stripe api key\}  
   > STRIPE_PRIVATE_KEY=\{ your public stripe api key\}
+
+* adjust uri in store.js on line 235 accordingly
+
 - npm start to start the app
   you can buy items from the store  
   test card number details are -  
