@@ -232,7 +232,7 @@ function updateCartTotal() {
 const payNowBtn = document.querySelector(".btn-purchase");
 payNowBtn.addEventListener("click", () => {
   console.log(orders);
-  fetch("http://localhost:8080/checkout-session", {
+  fetch("https://rajstore.herokuapp.com/checkout-session", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
