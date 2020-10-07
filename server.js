@@ -77,7 +77,7 @@ app.post("/checkout-session", async (req, res, next) => {
             currency: "usd",
             product_data: {
               name: detail.name,
-              images: [`http://localhost:8080/Images/${detail.imgName}`],
+              images: ["https://via.placeholder.com/150"],
             },
             unit_amount_decimal: detail.subTotal,
           },
@@ -116,8 +116,8 @@ app.post("/checkout-session", async (req, res, next) => {
           },
           line_items: lineItems,
           mode: "payment",
-          success_url: `http://localhost:${PORT}/payment-success`,
-          cancel_url: `http://localhost:${PORT}/payment-cancel`,
+          success_url: `https://rajstore.herokuapp.com/payment-success`,
+          cancel_url: `https://rajstore.herokuapp.com/payment-cancel`,
         });
         res.json({ id: session.id });
       } catch (error) {
