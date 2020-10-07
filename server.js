@@ -3,7 +3,6 @@ const path = require("path");
 const fs = require("fs");
 const express = require("express");
 const ejs = require("ejs");
-const { nextTick } = require("process");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 const app = express();
@@ -44,7 +43,6 @@ app.get("/payment-cancel", (req, res, next) => {
 
 app.post("/checkout-session", async (req, res, next) => {
   const products = req.body;
-  console.log(products);
   const productDetails = [];
   const totalPrice = 0;
   fs.readFile("item.json", async (error, data) => {
@@ -70,6 +68,7 @@ app.post("/checkout-session", async (req, res, next) => {
             productDetails.push(tempProduct);
           }
         });
+        console.log(productDetails);
         //all the products details here
         // console.log(productDetails);
         const lineItems = productDetails.map((detail) => ({
@@ -79,35 +78,10 @@ app.post("/checkout-session", async (req, res, next) => {
               name: detail.name,
               images: ["https://via.placeholder.com/150"],
             },
-            unit_amount_decimal: detail.subTotal,
+            unit_amount_decimal: detail.price,
           },
           quantity: detail.quantity,
         }));
-
-        // console.log(lineItems);
-        // const line_items = [
-        //   {
-        //     price_data: {
-        //       currency: "usd",
-        //       product_data: {
-        //         name: "product 1",
-        //       },
-        //       unit_amount_decimal: 50000,
-        //     },
-        //     quantity: 2,
-        //   },
-        //   {
-        //     price_data: {
-        //       currency: "usd",
-        //       product_data: {
-        //         name: "product 2",
-        //       },
-        //       unit_amount_decimal: 5000,
-        //     },
-        //     quantity: 1,
-        //   },
-        // ];
-        // console.log(lineItems);
         const session = await stripe.checkout.sessions.create({
           payment_method_types: ["card"],
           billing_address_collection: "required",
