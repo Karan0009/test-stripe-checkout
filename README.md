@@ -6,8 +6,8 @@ how to start app-
 
 - create .env file
 - add follwing things to .env:
-  > PORT=\{port here\} \(e.g. 8080\)
-  > STRIPE_PUBLIC_KEY=\{ your public stripe api key\}
+  > PORT=\{port here\} \(e.g. 8080\)  
+  > STRIPE_PUBLIC_KEY=\{ your public stripe api key\}  
   > STRIPE_PRIVATE_KEY=\{ your public stripe api key\}
 - npm start to start the app
   you can buy items from the store  
